@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Register (Step Two)";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Verify your new account.</h2>
+</hgroup>
+
+@using (Html.BeginForm("RegisterConfirmation", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>The verification Token has been sent</legend>
+        <ol>
+            <li>
+                @Html.Label("Verification Token")
+                @Html.TextBox("Id")
+            </li>
+        </ol>
+        <input type="submit" value="Verify" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

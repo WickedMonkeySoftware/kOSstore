@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="kos" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-03.2.0">
+  <Role name="kosstore">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="rlanders" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEGbJ+lTQ+h2YR4Xq3iGzveAwDQYJKoZIhvcNAQEBBQAEggEAQ1wYNr5eUGz4/jEsf7JzPE5xOo43AmzlzDI81n7e8urkSfbCzeG6RHi+pH4RN3+Rb29NQOOTUYzmwmlaZQev60cnjZrbvGOcm7ze3QEm7vCHD8KMxRHbp1BOFGiCGVn1QxTiXfxbodtb0G7xnL89grNYfE17Uk8nVb4nhWSYirS1tS8LeqKGNqcmpX8MGtC91J5zsm017ofTV8+bJpAGp1lJdc/MHNz1BQVUwVTaWLNzZBhjOC1UpCOz5Bec93fw6OB/WsrbCUK9sGxpAIo575tG3ZUGrcbajrUSpLpqazf34QqvLHKr3BUZuzFUr4t+4C2QrFvSVXaaOaX4AZAKHTAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECP3K946e8KaCgBBpAZ/r7kyddkCMrRT6D2Iy" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2025-09-23T23:59:59.0000000-04:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="7BF06A99DEECEE68414603B2D0C21F712311EB89" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="kosModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="kosModelStoreContainer">
+          <EntitySet Name="Like" EntityType="kosModel.Store.Like" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Script" EntityType="kosModel.Store.Script" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ScriptComments" EntityType="kosModel.Store.ScriptComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="kosModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Like_0" Association="kosModel.Store.FK_Like_0">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_1" Association="kosModel.Store.FK_Like_1">
+            <End Role="Script" EntitySet="Script" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Script_0" Association="kosModel.Store.FK_Script_0">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Script" EntitySet="Script" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScriptComments_0" Association="kosModel.Store.FK_ScriptComments_0">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="ScriptComments" EntitySet="ScriptComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScriptComments_1" Association="kosModel.Store.FK_ScriptComments_1">
+            <End Role="Script" EntitySet="Script" />
+            <End Role="ScriptComments" EntitySet="ScriptComments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Like">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ScriptId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Script">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ScriptName" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Script" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScriptComments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ScriptId" Type="int" Nullable="false" />
+          <Property Name="Added" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="56" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Like_0">
+          <End Role="UserProfile" Type="kosModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="Like" Type="kosModel.Store.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_1">
+          <End Role="Script" Type="kosModel.Store.Script" Multiplicity="1" />
+          <End Role="Like" Type="kosModel.Store.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Script">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="ScriptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Script_0">
+          <End Role="UserProfile" Type="kosModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="Script" Type="kosModel.Store.Script" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Script">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScriptComments_0">
+          <End Role="UserProfile" Type="kosModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="ScriptComments" Type="kosModel.Store.ScriptComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ScriptComments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScriptComments_1">
+          <End Role="Script" Type="kosModel.Store.Script" Multiplicity="1" />
+          <End Role="ScriptComments" Type="kosModel.Store.ScriptComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Script">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ScriptComments">
+              <PropertyRef Name="ScriptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kosModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="kosEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Scripts" EntityType="kosModel.Script" />
+          <EntitySet Name="UserProfileEFs" EntityType="kosModel.UserProfileEF" />
+          <AssociationSet Name="FK_Script_0" Association="kosModel.FK_Script_0">
+            <End Role="UserProfile" EntitySet="UserProfileEFs" />
+            <End Role="Script" EntitySet="Scripts" />
+          </AssociationSet>
+          <EntitySet Name="ScriptComments" EntityType="kosModel.ScriptComment" />
+          <AssociationSet Name="FK_ScriptComments_1" Association="kosModel.FK_ScriptComments_1">
+            <End Role="Script" EntitySet="Scripts" />
+            <End Role="ScriptComment" EntitySet="ScriptComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScriptComments_0" Association="kosModel.FK_ScriptComments_0">
+            <End Role="UserProfileEF" EntitySet="UserProfileEFs" />
+            <End Role="ScriptComment" EntitySet="ScriptComments" />
+          </AssociationSet>
+          <EntitySet Name="Likes" EntityType="kosModel.Like" />
+          <AssociationSet Name="FK_Like_0" Association="kosModel.FK_Like_0">
+            <End Role="UserProfileEF" EntitySet="UserProfileEFs" />
+            <End Role="Like" EntitySet="Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_1" Association="kosModel.FK_Like_1">
+            <End Role="Script" EntitySet="Scripts" />
+            <End Role="Like" EntitySet="Likes" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Script">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ScriptName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Script1" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="kosModel.FK_Script_0" FromRole="Script" ToRole="UserProfile" />
+          <NavigationProperty Name="ScriptComments" Relationship="kosModel.FK_ScriptComments_1" FromRole="Script" ToRole="ScriptComment" />
+          <NavigationProperty Name="Likes" Relationship="kosModel.FK_Like_1" FromRole="Script" ToRole="Like" />
+        </EntityType>
+        <EntityType Name="UserProfileEF">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Scripts" Relationship="kosModel.FK_Script_0" FromRole="UserProfile" ToRole="Script" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ScriptComments" Relationship="kosModel.FK_ScriptComments_0" FromRole="UserProfileEF" ToRole="ScriptComment" />
+          <NavigationProperty Name="Likes" Relationship="kosModel.FK_Like_0" FromRole="UserProfileEF" ToRole="Like" />
+        </EntityType>
+        <Association Name="FK_Script_0">
+          <End Type="kosModel.UserProfileEF" Role="UserProfile" Multiplicity="1" />
+          <End Type="kosModel.Script" Role="Script" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Script">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ScriptComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Comment" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="ScriptId" Nullable="false" />
+          <Property Type="DateTime" Name="Added" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Script" Relationship="kosModel.FK_ScriptComments_1" FromRole="ScriptComment" ToRole="Script" />
+          <NavigationProperty Name="UserProfile" Relationship="kosModel.FK_ScriptComments_0" FromRole="ScriptComment" ToRole="UserProfileEF" />
+        </EntityType>
+        <Association Name="FK_ScriptComments_1">
+          <End Type="kosModel.Script" Role="Script" Multiplicity="1" />
+          <End Type="kosModel.ScriptComment" Role="ScriptComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Script">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ScriptComment">
+              <PropertyRef Name="ScriptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScriptComments_0">
+          <End Type="kosModel.UserProfileEF" Role="UserProfileEF" Multiplicity="1" />
+          <End Type="kosModel.ScriptComment" Role="ScriptComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfileEF">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ScriptComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Like">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="ScriptId" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="kosModel.FK_Like_0" FromRole="Like" ToRole="UserProfileEF" />
+          <NavigationProperty Name="Script" Relationship="kosModel.FK_Like_1" FromRole="Like" ToRole="Script" />
+        </EntityType>
+        <Association Name="FK_Like_0">
+          <End Type="kosModel.UserProfileEF" Role="UserProfileEF" Multiplicity="1" />
+          <End Type="kosModel.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfileEF">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_1">
+          <End Type="kosModel.Script" Role="Script" Multiplicity="1" />
+          <End Type="kosModel.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Script">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="ScriptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="kosModelStoreContainer" CdmEntityContainer="kosEntities">
+          <EntitySetMapping Name="Scripts">
+            <EntityTypeMapping TypeName="kosModel.Script">
+              <MappingFragment StoreEntitySet="Script">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Script1" ColumnName="Script" />
+                <ScalarProperty Name="ScriptName" ColumnName="ScriptName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfileEFs">
+            <EntityTypeMapping TypeName="kosModel.UserProfileEF">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScriptComments">
+            <EntityTypeMapping TypeName="kosModel.ScriptComment">
+              <MappingFragment StoreEntitySet="ScriptComments">
+                <ScalarProperty Name="Added" ColumnName="Added" />
+                <ScalarProperty Name="ScriptId" ColumnName="ScriptId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Likes">
+            <EntityTypeMapping TypeName="kosModel.Like">
+              <MappingFragment StoreEntitySet="Like">
+                <ScalarProperty Name="ScriptId" ColumnName="ScriptId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

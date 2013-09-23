@@ -1,0 +1,73 @@
+﻿@model kosstore.Models.Script
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create (html allowed)</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Script</legend>
+
+        <div class="editor-label">
+            @Html.Label("Script Name")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ScriptName)
+            @Html.ValidationMessageFor(model => model.ScriptName)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Enter Script here")
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Script1)
+            @Html.ValidationMessageFor(model => model.Script1)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" onclick="doEncode()" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        function doEncode() {
+            f = $("#Script1").get(0);
+            f.value = htmlEncode(f.value);
+            return true;
+        }
+
+        function htmlEncode(str) {
+            // This must be done in a proper order to achive desired results.
+            str = this.replaceAll(str, "&", "&amp;");
+            str = this.replaceAll(str, "<", "&lt;");
+            str = this.replaceAll(str, ">", "&gt;");
+            str = this.replaceAll(str, " ", "&nbsp;");
+            return str;
+        }
+
+
+        function replaceAll(str, subStr, newStr) {
+            var offset = 0;
+            var index = str.indexOf(subStr);
+            while (index != -1) {
+                str = str.substr(0, index) + newStr + str.substr(index + subStr.length);
+                offset = index + newStr.length;
+                index = str.indexOf(subStr, offset);
+            }
+            return str;
+        }
+    </script>
+}

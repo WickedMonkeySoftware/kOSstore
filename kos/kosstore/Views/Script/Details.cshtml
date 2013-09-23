@@ -1,0 +1,113 @@
+﻿@model kosstore.Models.Script
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Script</legend>
+
+    <div class="display-label">
+        @Html.DisplayName("Script Name")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScriptName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayName("The Script")
+    </div>
+    <div class="display-field" id="script">
+        @Html.DisplayFor(model => model.Script1)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayName("Created By")
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserProfile.UserName)
+    </div>
+</fieldset>
+
+@foreach (var item in Model.ScriptComments)
+{
+    <div class="scriptComment">
+        <div class="commentBy">@Html.DisplayFor(m => item.UserProfile.UserName)</div>
+        <div class="commentOn">@Html.DisplayFor(m => item.Added)</div>
+        <div class="comment">@Html.DisplayFor(m => item.Comment)</div>
+    </div>
+}
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Comment", "Script", FormMethod.Post))
+    {
+    <p>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.Hidden("onScipt", Model.ID)
+
+        @Html.Label("Comment")
+        @Html.TextArea("comment");
+    </p>
+    <p>
+        <input type="submit" value="Comment" />
+    </p>
+    }
+}
+
+<p>
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) @Html.Encode(" | ")
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        function doEncode() {
+            f = $("#Script1").get(0);
+            f.value = htmlEncode(f.value);
+            return true;
+        }
+
+        function htmlEncode(str) {
+            // This must be done in a proper order to achive desired results.
+            str = this.replaceAll(str, "&", "&amp;");
+            str = this.replaceAll(str, "<", "&lt;");
+            str = this.replaceAll(str, ">", "&gt;");
+            str = this.replaceAll(str, " ", "&nbsp;");
+            return str;
+        }
+
+        function htmlDecode() {
+            str = $("#script").get(0).innerText;
+            str = this.replaceAll(str, "&nbsp;", " ");
+            str = this.replaceAll(str, "&gt;", ">");
+            str = this.replaceAll(str, "&lt;", "<");
+            str = this.replaceAll(str, "&amp;", "&");
+            $("#script").get(0).innerText = str;
+        }
+
+        $(function () {
+            htmlDecode();
+        });
+
+        function replaceAll(str, subStr, newStr) {
+            var offset = 0;
+            var index = str.indexOf(subStr);
+            while (index != -1) {
+                str = str.substr(0, index) + newStr + str.substr(index + subStr.length);
+                offset = index + newStr.length;
+                index = str.indexOf(subStr, offset);
+            }
+            return str;
+        }
+    </script>
+}

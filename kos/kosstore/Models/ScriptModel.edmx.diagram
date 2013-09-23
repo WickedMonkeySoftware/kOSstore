@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3d87a1062f1544cda7848b7d42d77c1a" Name="Diagram1">
+        <EntityTypeShape EntityType="kosModel.Script" Width="1.5" PointX="3.4533484612839991" PointY="3.0796583309209247" />
+        <EntityTypeShape EntityType="kosModel.UserProfileEF" Width="1.5" PointX="6.5" PointY="3.625" />
+        <AssociationConnector Association="kosModel.FK_Script_0" />
+        <EntityTypeShape EntityType="kosModel.ScriptComment" Width="1.5" PointX="10.450330059253764" PointY="12.825220650446239" />
+        <AssociationConnector Association="kosModel.FK_ScriptComments_1" />
+        <AssociationConnector Association="kosModel.FK_ScriptComments_0" />
+        <EntityTypeShape EntityType="kosModel.Like" Width="1.5" PointX="5.0362138510850327" PointY="12.453816389876332" />
+        <AssociationConnector Association="kosModel.FK_Like_0" />
+        <AssociationConnector Association="kosModel.FK_Like_1" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
