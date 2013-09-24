@@ -50,6 +50,7 @@ namespace kosstore.Controllers
             {
                 return HttpNotFound();
             }
+            script.Script1 = script.Script1.Replace("\n", "<br>");
             return View(script);
         }
 
