@@ -16,14 +16,20 @@ namespace kosstore.Controllers
     {
         private kosEntities db = new kosEntities();
 
-        //
-        // GET: /Script/
-
+        /// <summary>
+        /// View Index -- ie, a list of all scripts
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View(db.Scripts.ToList());
         }
 
+        /// <summary>
+        /// Adds a comment to a script
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [Authorize]
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -40,9 +46,11 @@ namespace kosstore.Controllers
             return RedirectToAction("Details", new { id = model.onScipt });
         }
 
-        //
-        // GET: /Script/Details/5
-
+        /// <summary>
+        /// View the details of the script
+        /// </summary>
+        /// <param name="id">The id of the script to view</param>
+        /// <returns></returns>
         public ActionResult Details(int id = 0)
         {
             Script script = db.Scripts.Find(id);
@@ -54,18 +62,21 @@ namespace kosstore.Controllers
             return View(script);
         }
 
-        //
-        // GET: /Script/Create
-
+        /// <summary>
+        /// View an empty script create page
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
-        //
-        // POST: /Script/Create
-
+        /// <summary>
+        /// Postback for the create page
+        /// </summary>
+        /// <param name="script"></param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -82,9 +93,11 @@ namespace kosstore.Controllers
             return View(script);
         }
 
-        //
-        // GET: /Script/Edit/5
-
+        /// <summary>
+        /// View and edit a script
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize]
         public ActionResult Edit(int id = 0)
         {
@@ -99,13 +112,14 @@ namespace kosstore.Controllers
             return View(script);
         }
 
-        //
-        // POST: /Script/Edit/5
-
+        /// <summary>
+        /// Post back for the edit page
+        /// </summary>
+        /// <param name="script"></param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        
         public ActionResult Edit(Script script)
         {
             if (ModelState.IsValid && script.UserId == WebSecurity.CurrentUserId)
@@ -120,9 +134,11 @@ namespace kosstore.Controllers
             return View(script);
         }
 
-        //
-        // GET: /Script/Delete/5
-
+        /// <summary>
+        /// Delete a script
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize]
         public ActionResult Delete(int id = 0)
         {
@@ -137,9 +153,11 @@ namespace kosstore.Controllers
             return View(script);
         }
 
-        //
-        // POST: /Script/Delete/5
-
+        /// <summary>
+        /// Post back for the delete page
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -152,6 +170,10 @@ namespace kosstore.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Destroy this controller
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
