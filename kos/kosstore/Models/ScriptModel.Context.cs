@@ -29,5 +29,6 @@ namespace kosstore.Models
         public DbSet<UserProfileEF> UserProfileEFs { get; set; }
         public DbSet<ScriptComment> ScriptComments { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<ScriptCategory> ScriptCategories { get; set; }
     }
 }

@@ -6,7 +6,8 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -32,8 +33,25 @@
             @Html.ValidationMessageFor(model => model.Script1)
         </div>
 
+        <div class="editor-label">
+            @Html.Label("Category")
+        </div>
+
+        <div class="editor-field">
+            <select name="category">
+                @{
+    kosstore.Models.kosEntities db = new kosstore.Models.kosEntities();
+    var cats = db.ScriptCategories.Where(m => m.ParentCategory != null).ToList();
+    foreach (var cat in cats)
+    {
+        @Html.Raw("<option value='" + cat.ID + "'" + (cat.ID == Model.Category ? " selected=true" : "") + ">" + db.ScriptCategories.Find(cat.ParentCategory).CategoryName + " : " + cat.CategoryName + "</option>");
+    }
+                }
+            </select>
+        </div>
+
         <p>
-            <input type="submit" value="Save" onclick="doEncode()"/>
+            <input type="submit" value="Save" onclick="doEncode()" />
         </p>
     </fieldset>
 }

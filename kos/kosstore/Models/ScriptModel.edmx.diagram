@@ -14,6 +14,8 @@
         <EntityTypeShape EntityType="kosModel.Like" Width="1.5" PointX="5.0362138510850327" PointY="12.453816389876332" />
         <AssociationConnector Association="kosModel.FK_Like_0" />
         <AssociationConnector Association="kosModel.FK_Like_1" />
+        <EntityTypeShape EntityType="kosModel.ScriptCategory" Width="1.5" PointX="5.2281915811953095" PointY="8.0216586180132161" />
+        <AssociationConnector Association="kosModel.FK_Script_1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

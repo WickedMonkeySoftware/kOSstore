@@ -12,10 +12,16 @@
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ScriptName)
+            <a>@Html.DisplayName("Script Name")</a>
         </th>
         <th>
             @Html.DisplayName("Created by")
+        </th>
+        <th class="desc">
+            <a>@Html.DisplayName("Submitted")</a>
+        </th>
+        <th>
+            @Html.DisplayName("Category")
         </th>
         <th></th>
     </tr>
@@ -28,6 +34,12 @@
             </td>
             <td>
                 @Html.DisplayFor(m => item.UserProfile.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Submitted)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.ScriptCategory.CategoryName)
             </td>
             <td>
                 @if ((int)WebSecurity.CurrentUserId == item.UserId)

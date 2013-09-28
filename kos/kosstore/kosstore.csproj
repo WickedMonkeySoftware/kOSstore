@@ -210,10 +210,14 @@
     <Compile Include="Models\Script.cs">
       <DependentUpon>ScriptModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ScriptCategory.cs">
+      <DependentUpon>ScriptModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ScriptComment.cs">
       <DependentUpon>ScriptModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ScriptCommentModel.cs" />
+    <Compile Include="Models\ScriptEditModel.cs" />
     <Compile Include="Models\ScriptModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
