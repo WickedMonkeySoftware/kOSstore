@@ -24,9 +24,12 @@ namespace kosstore.Models
         public string ScriptName { get; set; }
         public string Script1 { get; set; }
         public int UserId { get; set; }
+        public System.DateTime Submitted { get; set; }
+        public Nullable<int> Category { get; set; }
     
         public virtual UserProfileEF UserProfile { get; set; }
         public virtual ICollection<ScriptComment> ScriptComments { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
+        public virtual ScriptCategory ScriptCategory { get; set; }
     }
 }

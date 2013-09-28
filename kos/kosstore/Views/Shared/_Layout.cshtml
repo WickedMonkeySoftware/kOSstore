@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title - kOS Store</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script>
+    <script type="text/ecmascript">
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -17,19 +18,12 @@
 
         ga('create', 'UA-44231394-1', 'kosstore.com');
         ga('send', 'pageview');
-
     </script>
 </head>
 <body>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">@Html.ActionLink("kOS Store", "Index", "Home")</p>
-            </div>
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
+    <div class="topnavwrap">
+        <div class="topnav">
+            <div class="topnavlinks">
                 <nav>
                     <ul id="menu">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
@@ -38,14 +32,111 @@
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     </ul>
                 </nav>
+                <br style="clear: left" />
             </div>
+            <section id="login">
+                @Html.Partial("_LoginPartial")
+            </section>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <header>
+        <div class="content-wrapper">
+            <div class="logo">
+                <p class="site-title">@Html.ActionLink("kOS Data Store", "Index", "Home")</p>
+            </div>
+            <div class="topsearchbar">
+                <table>
+                    <tr>
+                        <td>
+                            <form class="search_bar">
+                                <input name="search" type="text" placeholder="Search -- coming soon!" />
+                                <!-- <input type="submit" value="Go" /> -->
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clear"></div>
         </div>
     </header>
+    <div id="accordian">
+        <ul>
+            <li>
+                <h3>
+                    <span class="icon-search"></span>Search by Category
+                </h3>
+            </li>
+            <li>
+                <h3>
+                    <span class="icon-dashboard"></span>Basic Scripts
+                </h3>
+                <ul>
+                    <li>
+                        @Html.ActionLink("Basic Scripts", "Index", "Script", new { category = 1 }, null)
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>
+                    <span class="icon-rocket"></span>Ship Scripts
+                </h3>
+                <ul>
+                    <li>
+                        <h2>
+                            Space Ship
+                        </h2>
+                        <ul>
+                            <li>
+                                @Html.ActionLink("Launch", "Index", "Script", new { category = 5 }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Orbital", "Index", "Script", new { category = 6 }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Re-Entry", "Index", "Script", new { category = 7 }, null)
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>
+                            Plane
+                        </h2>
+                        <ul>
+                            <li>
+                                @Html.ActionLink("Take Off", "Index", "Script", new { category = 8 }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("In Flight", "Index", "Script", new { category = 9 }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Orbital", "Index", "Script", new { category = 10 }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Landing and Re-Entry", "Index", "Script", new { category = 12 }, null)
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>
+                    <span class="icon-truck"></span>Rover Scripts
+                </h3>
+                <ul>
+                    <li>
+                        @Html.ActionLink("Rover Scripts", "Index", "Script", new { category = 1 }, null)
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
     <div id="body">
         @RenderSection("featured", required: false)
         <section class="content-wrapper main-content clear-fix">
             @RenderBody()
         </section>
+        <div class="clear"></div>
     </div>
     <footer>
         <div class="content-wrapper">
@@ -57,5 +148,22 @@
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(function () {
+            $("#accordian h3").click(function () {
+                $("#accordian ul ul").slideUp();
+                if (!$(this).next().is('visible')) {
+                    $(this).next().slideDown();
+                }
+            });
+            $("#accordian h2").click(function () {
+                $("#accordian ul ul ul").slideUp();
+                if (!$(this).next().is('visible')) {
+                    $(this).next().slideDown();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

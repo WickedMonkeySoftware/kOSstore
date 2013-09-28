@@ -20,9 +20,16 @@ namespace kosstore.Controllers
         /// View Index -- ie, a list of all scripts
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(int category = 0)
         {
-            return View(db.Scripts.ToList());
+            if (category > 0)
+            {
+                return View(db.Scripts.Where(m => m.ScriptCategory.ID == category).OrderBy(m => m.Submitted).ToList());
+            }
+            else
+            {
+                return View(db.Scripts.ToList());
+            }
         }
 
         /// <summary>
@@ -85,6 +92,7 @@ namespace kosstore.Controllers
             if (ModelState.IsValid)
             {
                 script.UserId = WebSecurity.CurrentUserId;
+                script.ScriptCategory.ID = 1;
                 db.Scripts.Add(script);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -125,7 +133,9 @@ namespace kosstore.Controllers
             if (ModelState.IsValid && script.UserId == WebSecurity.CurrentUserId)
             {
                 //script.Script1 = Helpers.StripTagsCharArray(script.Script1);
-                //script.Script1 = System.Net.WebUtility.HtmlEncode(script.Script1);
+                //script.Script1 = System.Net.WebUtility.HtmlEncode(script.Script1);'
+
+                script.Submitted = DateTime.Now;
 
                 db.Entry(script).State = EntityState.Modified;
                 db.SaveChanges();
